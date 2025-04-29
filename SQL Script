@@ -14,3 +14,46 @@ GROUP BY
 ORDER BY
     order_year,
     order_month;
+
+
+#OUTPUT
+
+| Year | Month     | Monthly Revenue (USD) | Order Volume |
+|------|-----------|-----------------------|---------------|
+| 2024 | January   | 14,548.32             | 31 orders     |
+| 2024 | February  | 10,803.37             | 29 orders     |
+| 2024 | March     | 12,849.24             | 31 orders     |
+| 2024 | April     | 12,451.69             | 30 orders     |
+| 2024 | May       | 8,455.49              | 31 orders     |
+| 2024 | June      | 7,384.55              | 30 orders     |
+| 2024 | July      | 6,797.08              | 31 orders     |
+| 2024 | August    | 7,278.11              | 27 orders     |
+
+
+
+
+###Top 3 Months by Sales
+##If you want to find the top 3 months with the highest revenue, use:
+
+SELECT
+    EXTRACT(YEAR FROM order_date) AS order_year,
+    EXTRACT(MONTH FROM order_date) AS order_month,
+    SUM(amount) AS monthly_revenue
+FROM
+    online_sales
+GROUP BY
+    EXTRACT(YEAR FROM order_date),
+    EXTRACT(MONTH FROM order_date)
+ORDER BY
+    monthly_revenue DESC
+LIMIT 3;
+
+
+#OUTPUT
+
+| Rank    | Year | Month     | Revenue (USD)     | Order Volume |
+|---------|-----|------------|-------------------|----------------|
+| 🥇 1st | 2024 | January   | 14,548.32         | 31 orders       |
+| 🥈 2nd | 2024 | March     | 12,849.24         | 31 orders       |
+| 🥉 3rd | 2024 | April     | 12,451.69         | 30 orders       |
+
